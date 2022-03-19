@@ -26,8 +26,8 @@
 
 name: "stt_de_conformer_ctc_large"
 #### ADDED MANUALLY
-source_config: "EN"
-target_config: "DE_commonvoice"
+source_config: "DE"
+target_config: "CH_meteo"
 tokenizer_name: "tokenizer_spe_bpe_v50257"
 #### END ADDED MANUALLY
 
@@ -163,7 +163,7 @@ model:
 trainer:
   devices: -1 # number of GPUs, -1 would use all available GPUs
   num_nodes: 1
-  max_epochs: 1000
+  max_epochs: 10
   max_steps: null # computed at runtime if not set
   val_check_interval: 1.0 # Set to 0.25 to check 4 times per epoch, or an int for number of iterations
   accelerator: gpu

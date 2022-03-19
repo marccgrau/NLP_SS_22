@@ -9,7 +9,7 @@ from nemo.utils.exp_manager import exp_manager
 from pathlib import Path
 import torch
 
-EXPERIMENT_PROJECT = "swiss2text"
+EXPERIMENT_PROJECT = "NLP_SS_22"
 ANNOTATION_FILE = "transcriptions_{}.json"
 
 MAIN_DATA_DIR = Path("/data")
@@ -72,7 +72,7 @@ def main(cfg):
     asr_model.setup_test_data(cfg.model.test_ds)
     logging.info(f'Data loaders set up')
     # setup the optimization procedure
-    asr_model.setup_optimization(optim_config=DictConfig(cfg.model.optim))
+    asr_model.setup_optimization(cfg.model.optim)
     logging.info(f'Optimizer set up')
     # check for validity of model config
     logging.info(f'Model config: {OmegaConf.to_yaml(asr_model.cfg)}')
