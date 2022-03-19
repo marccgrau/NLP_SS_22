@@ -6,4 +6,4 @@ LOCAL_DATA="/data"
 
 python3 trainConfig.py \
   --config-path=configs/models/nemo \
-  --config-name=conformerTD
+  --config-name=conformerCTC
