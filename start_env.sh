@@ -11,8 +11,8 @@
 repo="registry.gitlab.com/ds-unisg/servers/python-docker"
 
 python="39"
-pytorch="110"
-nemo="17"
+pytorch="111"
+nemo="18"
 
 if [ "${GPUS}" == "none" ];
 then
