@@ -65,7 +65,7 @@ kaldi-io==0.9.4
 kaldi-python-io==1.2.2
 kaldiio==2.17.2
 kiwisolver==1.3.2
-librosa==0.9.1
+librosa~=0.8.1
 llvmlite==0.38.0
 Markdown==3.3.6
 MarkupSafe==2.1.0
@@ -162,7 +162,7 @@ testpath==0.6.0
 threadpoolctl==3.1.0
 tifffile==2022.2.9
 tokenizers==0.11.6
-torch==1.11.0
+torch~=1.10.0
 torch-stft==0.1.4
 torchaudio==0.11.0
 torchmetrics==0.7.2
@@ -190,3 +190,6 @@ yarl==1.7.2
 yaspin==2.1.0
 youtokentome==1.0.6
 zipp==3.7.0
+NEMO~=3.13.2
+pathlib~=1.0.1
+typing~=3.7.4.3

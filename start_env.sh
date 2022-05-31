@@ -61,7 +61,7 @@ docker=(
     "-v" "${LOCAL_HOME}/.netrc:${remote_home}/.netrc:ro"
     "-v" "${LOCAL_CODE}:${remote_home}/code"
     "-v" "${LOCAL_DATA}:${remote_data}"
-    "-v" "${local_pretrained}:${remote_home}/.cache/torch/NeMo"
+    "-v" "${local_pretrained}:${remote_home}/.cache/torch"
     "-w" "${remote_home}/code"
  )
 
