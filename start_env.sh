@@ -21,7 +21,7 @@ else
   arch="gpu"
 fi
 
-NEMO_IMAGE="${repo}/py${python}/${arch}-ds-pytorch${pytorch}-nemo${nemo}"
+NEMO_IMAGE="${repo}/py${python}/${arch}-ds-pt${pytorch}-nemo${nemo}"
 
 if [ -z "${PORT+x}" ];
 then
