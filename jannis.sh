@@ -10,21 +10,6 @@
 # You shouldn't need to modify anything later than here.
 repo="janniskatis/nlp_image"
 
-if [ "${GPUS}" == "none" ];
-then
-  arch="cpu"
-else
-  arch="gpu"
-fi
-
-if [ -z "${PORT+x}" ];
-then
-    nemo_image="${NEMO_IMAGE}:cli"
-else
-    nemo_image="${NEMO_IMAGE}:jupyter"
-fi
-
-
 memory_limit="${MEMORY_LIMIT}G"
 
 remote_home="/home/user"
@@ -45,20 +30,10 @@ docker=(
     "--ulimit" "memlock=-1"
     "--ulimit" "stack=67108864"
     "-e" "TF_FORCE_GPU_ALLOW_GROWTH=true"
-    "-v" "${LOCAL_HOME}/.netrc:${remote_home}/.netrc:ro"
     "-v" "${LOCAL_CODE}:${remote_home}/code"
     "-v" "${LOCAL_DATA}:${remote_data}"
-    "-v" "${local_pretrained}:${remote_home}/.cache/torch"
     "-w" "${remote_home}/code"
  )
-
-# Add GPU if they are set
-if [ "${GPUS}" != "none" ];
-then
-    docker+=(
-        "--gpus=\"device=${GPUS}\""
-    )
-fi
 
 # Run Jupyter if a PORT is set, else run bash
 if [ -z "${PORT+x}" ];
