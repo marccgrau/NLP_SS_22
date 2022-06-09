@@ -8,7 +8,7 @@
 : "${LOCAL_HOME:="${HOME}"}"
 
 # You shouldn't need to modify anything later than here.
-repo="janniskatis/nlp_image"
+nemo_image="janniskatis/nlp_image"
 
 memory_limit="${MEMORY_LIMIT}G"
 
