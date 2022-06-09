@@ -20,7 +20,6 @@ class NeMoSttOutputReader(SttOutputReader):
                 word = word_dict['alternatives'][0]['content']
                 start_time = float(word_dict['start_time'])
                 end_time = float(word_dict['end_time'])
-                confidence = float(word_dict['alternatives'][0]['confidence'])
-                stt_output.append(Word(word, start_time, end_time, confidence))
+                stt_output.append(Word(word, start_time, end_time))
 
         return stt_output
