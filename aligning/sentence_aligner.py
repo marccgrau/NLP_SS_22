@@ -161,7 +161,7 @@ class SentenceAligner:
                 new_stt_offset = stt_index + len(appendix)
                 for i in range(stt_index, new_stt_offset):
                     stt_index_to_word_info_mapping[i] = {
-                        'word': Word(word_preprocessed, word.start_time, word.end_time),
+                        'word': Word(word_preprocessed, word.start_time, word.end_time, word.confidence),
                         'start_index': stt_index,
                         'end_index': new_stt_offset - 1,
                     }
@@ -312,13 +312,14 @@ class SentenceAligner:
                 truth_index_to_stt_index[truth_index] = min(stt_index, len(stt_transcript_preprocessed) - 1)
         assert len(truth_index_to_stt_index) == len(truth_transcript_preprocessed)
 
-        WordInfoTuple = namedtuple('WordInfo', ['start_time', 'end_time', 'word'])
+        WordInfoTuple = namedtuple('WordInfo', ['start_time', 'end_time', 'word', 'stt_confidence'])
 
         def word_info_to_tuple(word_info):
             return WordInfoTuple(
                 start_time=word_info['word'].start_time,
                 end_time=word_info['word'].end_time,
-                word=word_info['word'].word
+                word=word_info['word'].word,
+                stt_confidence=word_info['word'].confidence
             )
 
         last_end_time = 0.0
@@ -361,6 +362,11 @@ class SentenceAligner:
                 alignment_info['truth_length'].append(len(truth_sentence_preprocessed))
                 alignment_info['stt_length'].append(len(stt_sentence_preprocessed))
                 alignment_info['score'].append(self.aligner.score(truth_sentence_preprocessed, stt_sentence_preprocessed))
+                alignment_info['stt_confidence'].append(
+                    statistics.mean([word_info_tuple.stt_confidence for word_info_tuple in stt_word_info_tuples])
+                    if len(stt_word_info_tuples) > 0
+                    else None
+                )
                 alignment_info['truth_string'].append(truth_sentence_preprocessed)
                 alignment_info['stt_string'].append(stt_sentence_preprocessed)
                 alignment_info['audio_duration'].append(end_time - start_time)
@@ -373,6 +379,7 @@ class SentenceAligner:
                 alignment_info['truth_length'].append(0)
                 alignment_info['stt_length'].append(0)
                 alignment_info['score'].append(None)
+                alignment_info['stt_confidence'].append(0.0)
                 alignment_info['truth_string'].append('')
                 alignment_info['stt_string'].append('')
                 alignment_info['audio_duration'].append(0.0)

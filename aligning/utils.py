@@ -5,13 +5,14 @@ ALPHABET_ASCII = {chr(i) for i in range(128)}
 ALPHABET_LATIN_1 = {chr(i) for i in range(256)}
 
 class Word:
-    def __init__(self, word: str, start_time: float, end_time: float):
+    def __init__(self, word: str, start_time: float, end_time: float, confidence: float):
         self.word = word
         self.start_time = start_time
         self.end_time = end_time
+        self.confidence = confidence
 
     def __repr__(self):
-        return f'Word(word={self.word}, start_time={self.start_time}, end_time={self.end_time})'
+        return f'Word(word={self.word}, start_time={self.start_time}, end_time={self.end_time}, confidence={self.confidence})'
 
 
 def create_aligner_global(
